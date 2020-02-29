@@ -1,32 +1,53 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <b-navbar toggleable="lg" type="light" variant="light" class="border-bottom">
+      <b-navbar-brand><b-link to="/"><p class="navlinks" id="app-name">MindBlogging</p></b-link></b-navbar-brand>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item><b-link to="/login"><p class="navlinks">Login</p></b-link></b-nav-item>
+          <b-nav-item><b-link to="/register"><p class="navlinks">Register</p></b-link></b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+    <transition name="fade" mode="out-in">
+      <router-view> </router-view>
+    </transition>
   </div>
 </template>
 
 <style>
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+    opacity: 0
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
+.navlinks {
+  color: black;
+  font-family: 'BioRhyme';
+  opacity: 0.5;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+li a:hover {
+  text-decoration: none;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.navbar-brand a:hover {
+  text-decoration: none;
+}
+.navlinks:hover {
+  opacity: 1;
+}
+.navlinks:visited {
+  color: black;
+}
+#app-name {
+  opacity: 1;
 }
 </style>
