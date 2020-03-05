@@ -1,19 +1,7 @@
 <template>
   <div>
-    <b-alert v-model="error" variant="danger" dismissible>
-      An error occurred
-    </b-alert>
-    <b-alert v-model="success" variant="success" dismissible>
-      Successfully created account. Please log in to continue.
-    </b-alert>
-    <b-modal ref="success-modal" hide-footer title="Success!">
-      <div class="d-block text-center">
-        <h3>Your account was successfully created!</h3>
-        <p>Please log in </p>
-      </div>
-      <b-button class="mt-3" variant="outline-danger" block @click="hideErrorModal">Close</b-button>
-    </b-modal>
-    <b-container v-if="!error" id="register-container">
+    <MessageAlert :show="alertProps.show" :variant="alertProps.variant" :message="alertProps.message" />
+    <b-container id="register-container">
       <b-row><b-col></b-col><b-col id="title">Registration Form</b-col><b-col></b-col></b-row>
       <b-form @submit="createUser()" @submit.prevent>
         <b-form-group
@@ -23,7 +11,7 @@
         >
           <b-form-input
             id="first-name"
-            v-model="firstName"
+            v-model="form.firstName"
             placeholder="Type a first name"
           ></b-form-input>
         </b-form-group>
@@ -34,7 +22,7 @@
         >
         <b-form-input
           id="last-name"
-          v-model="lastName"
+          v-model="form.lastName"
           placeholder="Type a last name"
         ></b-form-input>
         </b-form-group>
@@ -46,21 +34,33 @@
         >
           <b-form-input
             id="username"
-            v-model="username"
+            v-model="form.username"
             placeholder="Type a username"
           ></b-form-input>
         </b-form-group>
         <b-form-group
-          id="input-group-1"
+          id="input-group-4"
           label="Email:"
           label-for="email"
-          description="This will not be shared with anyone."
         >
           <b-form-input
             id="email"
-            v-model="email"
+            v-model="form.email"
             placeholder="Type a email"
             type="email"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-5"
+          label="Password:"
+          label-for="password"
+          description="This will not be shared with anyone."
+        >
+          <b-form-input
+            id="password"
+            v-model="form.password"
+            placeholder="Type a strong password"
+            type="password"
           ></b-form-input>
         </b-form-group>
         <b-button type="submit"><b-spinner small v-if="loading"></b-spinner><span v-if="!loading">Submit</span></b-button>
@@ -71,48 +71,76 @@
 
 <script>
 const CREATE_USER = require('../graphql/CreateUser.gql');
+import MessageAlert from '../components/MessageAlert';
+
 export default {
   data () {
     return {
-      firstName: '',
-      lastName: '',
-      username: '',
-      email: '',
-      password: '',
+      form: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '',
+        password: '',
+      },
+      alertProps: {
+        show: false,
+        variant: 'danger',
+        message: ''
+      },
       loading: false,
-      error: false,
-      success: false,
     }
   },
+  components: {
+    MessageAlert
+  },
   methods: {
-    hideErrorModal() {
-      this.$refs['error-modal'].hide()
-    },
     createUser () {
+      const resetAlertProps = () => {
+        this.alertProps = {
+          show: false,
+          variant: 'danger',
+          message: ''
+        }
+      };
+      const resetFormProps = () => {
+        this.form = {
+          firstName: '',
+          lastName: '',
+          username: '',
+          email: '',
+          password: '',
+        }
+      }
+      resetAlertProps();
       this.loading = true;
       this.$apollo.mutate({
         mutation: CREATE_USER,
         variables: {
           input: {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            username: this.username,
-            email: this.email,
-            password: this.password
+            firstName: this.form.firstName,
+            lastName: this.form.lastName,
+            username: this.form.username,
+            email: this.form.email,
+            password: this.form.password
           },
         },
         update: () => {
           this.loading = false;
-          this.error = false;
-          this.success = true;
+          this.alertProps.show = true;
+          this.alertProps.variant = 'success';
+          this.alertProps.message = 'Successfully created an account. Please login to continue.';
+          resetFormProps();
+          
         }
       })
       .catch(() => {
         this.loading = false;
-        this.error = true;
-        this.success = false;
+        this.alertProps.variant = 'danger';
+        this.alertProps.show = true;
+        this.alertProps.message = 'An error occurred.'
       });
-    }
+    },
   },
 }
 </script>
