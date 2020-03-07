@@ -20,10 +20,14 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Register.vue")
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () =>
-      import("../views/Login.vue")
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/Login.vue")
+  },
+  {
+    path: "/match-finder",
+    name: "Match Finder",
+    component: () => import("../views/MatchFinder.vue")
   }
 ];
 

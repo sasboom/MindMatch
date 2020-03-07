@@ -23,7 +23,7 @@
 import Form from "../components/Form.vue";
 import LoginMutation from "../graphql/Login.gql";
 import MessageAlert from "../components/MessageAlert";
-
+import { onLogin } from "../vue-apollo";
 export default {
   name: "Home",
   components: {
@@ -61,8 +61,8 @@ export default {
         this.alertProps.variant = "danger";
         this.alertProps.message = "Invalid credential";
       } else {
-        localStorage.setItem("token", data.response.LoginUser.payload);
-        this.$router.push("/");
+        onLogin(this.$apollo, data.response.LoginUser.payload);
+        this.$router.push("/match-finder");
       }
     }
   }
