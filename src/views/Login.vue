@@ -4,6 +4,7 @@
       :show="alertProps.show"
       :variant="alertProps.variant"
       :message="alertProps.message"
+      :dismissedFn="resetAlertProps"
     />
     <b-container id="login-container">
       <b-row>
@@ -13,7 +14,14 @@
         </b-col>
         <b-col></b-col>
       </b-row>
-      <Form :formElements="formElements" :mutation="mutation" @formResponse="getLoginResponse" />
+      <Form
+        :formElements="formElements"
+        :mutation="mutation"
+        @formResponse="getLoginResponse"
+        :responseProp="responseProp"
+        :includeClearButton="false"
+        submitButtonText="Login"
+      />
     </b-container>
   </div>
 </template>
@@ -33,6 +41,7 @@ export default {
   data() {
     return {
       mutation: LoginMutation,
+      responseProp: "LoginUser",
       formElements: [
         {
           label: "Username",
@@ -61,9 +70,16 @@ export default {
         this.alertProps.variant = "danger";
         this.alertProps.message = "Invalid credential";
       } else {
-        onLogin(this.$apollo, data.response.LoginUser.payload);
+        onLogin(this.$apollo, data.response.payload);
         this.$router.push("/match-finder");
       }
+    },
+    resetAlertProps() {
+      this.alertProps = {
+        show: false,
+        variant: "",
+        message: ""
+      };
     }
   }
 };
