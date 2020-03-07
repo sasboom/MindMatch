@@ -1,7 +1,7 @@
 <template>
-    <b-alert :show="show" :variant="variant" dismissible>
-      {{message}}
-    </b-alert>
+  <b-alert :show="show" :variant="variant" dismissible>
+    {{ message }}
+  </b-alert>
 </template>
 
 <script>
