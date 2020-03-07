@@ -11,10 +11,20 @@
           class="form-element"
         />
       </div>
-      <b-button type="submit" id="submitBtn">
-        <b-spinner small v-if="loading"></b-spinner>
-        <span v-if="!loading">Submit</span>
-      </b-button>
+      <b-button-group vertical class="formBtns">
+        <b-button type="submit" variant="outline-success" id="submitBtn">
+          <b-spinner small v-if="loading"></b-spinner>
+          <span v-if="!loading" class="btnText">{{submitButtonText}}</span>
+        </b-button>
+        <b-button
+          v-if="includeClearButton"
+          @click="clearForm()"
+          variant="outline-danger"
+          id="clearBtn"
+        >
+          <span class="btnText">Clear</span>
+        </b-button>
+      </b-button-group>
     </b-form>
   </div>
 </template>
@@ -24,8 +34,11 @@ import FormInput from "./FormInput.vue";
 export default {
   name: "Form",
   props: {
+    responseProp: String,
     formElements: Array,
-    mutation: Object
+    mutation: Object,
+    includeClearButton: Boolean,
+    submitButtonText: String
   },
   data() {
     return {
@@ -51,8 +64,8 @@ export default {
           update: (cache, { data }) => {
             this.loading = false;
             this.$emit("formResponse", {
-              response: data,
-              error: data.LoginUser.error
+              response: data[this.responseProp],
+              error: data[this.responseProp].error
             });
           }
         })
@@ -60,6 +73,9 @@ export default {
           this.loading = false;
           this.$emit("formResponse", { response: err, error: true });
         });
+    },
+    clearForm() {
+      this.form = {};
     }
   }
 };
@@ -72,7 +88,18 @@ export default {
   font-size: 15pt;
   text-align: left;
 }
-#submitBtn {
+.formBtns {
   margin-top: 2vh;
+  width: 100%;
+}
+.btnText {
+  font-family: "BioRhyme";
+  font-size: 15pt;
+}
+#submitBtn {
+  margin-top: 1vh;
+}
+#clearBtn {
+  margin-top: 1vh;
 }
 </style>
