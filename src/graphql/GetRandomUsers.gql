@@ -1,0 +1,10 @@
+query GetRandomUsers {
+  randomUsers {
+    payload {
+      id
+      firstName
+      lastName
+      username
+    }
+  }
+}
