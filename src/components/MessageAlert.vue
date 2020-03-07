@@ -1,7 +1,5 @@
 <template>
-  <b-alert :show="show" :variant="variant" dismissible>
-    {{ message }}
-  </b-alert>
+  <b-alert :show="show" :variant="variant" dismissible @dismissed="dismissedFn">{{ message }}</b-alert>
 </template>
 
 <script>
@@ -10,7 +8,8 @@ export default {
   props: {
     show: Boolean,
     variant: String,
-    message: String
+    message: String,
+    dismissedFn: Function
   }
 };
 </script>
