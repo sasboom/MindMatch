@@ -1,0 +1,7 @@
+mutation matchRequest($input: MatchRequestInput) {
+  MatchRequest(input: $input) {
+    initiatorUserId,
+    requestedUserId,
+    status
+  }
+}
