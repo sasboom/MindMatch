@@ -28,6 +28,11 @@ const routes = [
     path: "/match-finder",
     name: "Match Finder",
     component: () => import("../views/MatchFinder.vue")
+  },
+  {
+    path: '/match-list',
+    name: "Match List",
+    component: () => import("../views/MatchList.vue")
   }
 ];
 

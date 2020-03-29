@@ -77,6 +77,9 @@ export default {
     MessageAlert,
     Form
   },
+  mounted: function() {
+    localStorage.clear();
+  },
   methods: {
     getRegisterResponse(data) {
       if (data.error) {

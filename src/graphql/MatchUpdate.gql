@@ -1,0 +1,7 @@
+mutation matchUpdate($input: MatchUpdateInputType) {
+  MatchUpdate(input: $input) {
+    initiatorUserId,
+    requestedUserId,
+    status
+  }
+}

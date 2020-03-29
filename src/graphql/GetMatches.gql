@@ -1,0 +1,12 @@
+query GetMatches {
+  matches {
+    payload {
+      id
+      initiatorUserId
+      requestedUserId
+      status
+      createdAt
+      updatedAt
+    }
+  }
+}
