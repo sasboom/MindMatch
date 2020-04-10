@@ -20,10 +20,10 @@
                 variant="outline-success"
                 class="actionBtns"
               >Send Request</b-button>
-              <b-button href="#" variant="outline-danger" class="actionBtns">Decline</b-button>
+              <b-button variant="outline-danger" class="actionBtns">Decline</b-button>
             </b-button-group>
             <template v-slot:footer>
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small class="text-muted">Last Updated: {{user.lastUpdated}}</small>
             </template>
           </b-card>
         </div>
@@ -39,6 +39,7 @@ import Navbar from "../components/Navbar";
 import MessageAlert from "../components/MessageAlert";
 import MATCH_REQUEST from "../graphql/MatchRequest.gql";
 import RANDOM_USERS_QUERY from "../graphql/GetRandomUsers.gql";
+import moment from 'moment';
 
 export default {
   name: "MatchFinder",
@@ -60,7 +61,10 @@ export default {
         query: RANDOM_USERS_QUERY
       })
       .then(response => {
-        this.randomUsers = response.data.randomUsers.payload;
+        this.randomUsers = response.data.randomUsers.payload.map(user => ({
+          ...user,
+          lastUpdated: moment(parseInt(user.updatedAt)).fromNow()
+        }));
       });
   },
   mounted: function() {
@@ -79,12 +83,13 @@ export default {
       };
     },
     sendRequest(user) {
+      let currentUser = JSON.parse(localStorage.getItem('user'));
       return this.$apollo
         .mutate({
           mutation: MATCH_REQUEST,
           variables: {
             input: {
-              initiatorUserId: "6e3ab5ee-80aa-44ef-9395-8db9fe761c29",
+              initiatorUserId: currentUser.id,
               requestedUserId: user.id
             }
           },
@@ -100,7 +105,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    }
+    },
   }
 };
 </script>

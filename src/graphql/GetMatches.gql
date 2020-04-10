@@ -7,6 +7,12 @@ query GetMatches {
       status
       createdAt
       updatedAt
+      initiator {
+        id
+        firstName
+        lastName
+        username
+      }
     }
   }
 }

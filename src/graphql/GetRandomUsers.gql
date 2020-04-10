@@ -5,6 +5,7 @@ query GetRandomUsers {
       firstName
       lastName
       username
+      updatedAt
     }
   }
 }
