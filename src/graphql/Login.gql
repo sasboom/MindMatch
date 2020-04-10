@@ -1,6 +1,9 @@
 mutation loginUser($input: LoginUserInput) {
   LoginUser(input: $input) {
     error,
-    payload
+    payload {
+      token
+      user
+    }
   }
 }

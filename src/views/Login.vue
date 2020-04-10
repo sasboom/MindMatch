@@ -70,7 +70,7 @@ export default {
         this.alertProps.variant = "danger";
         this.alertProps.message = "Invalid credential";
       } else {
-        onLogin(this.$apollo, data.response.payload);
+        onLogin(this.$apollo, data.response.payload.token, data.response.payload.user);
         this.$router.push("/match-finder");
       }
     },

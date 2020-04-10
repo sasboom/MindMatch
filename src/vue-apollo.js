@@ -77,9 +77,10 @@ export function createProvider(options = {}) {
 }
 
 // Manually call this when user log in
-export async function onLogin(apolloClient, token) {
+export async function onLogin(apolloClient, token, user) {
   if (typeof localStorage !== 'undefined' && token) {
-    localStorage.setItem(AUTH_TOKEN, token)
+    localStorage.setItem(AUTH_TOKEN, token);
+    localStorage.setItem('user', user);
   }
   if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient)
   try {
