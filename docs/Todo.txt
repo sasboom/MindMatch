@@ -1,0 +1,30 @@
+MindMatch Things to do:
+
+Register Page:
+
+Layout Changes
+
+                Register
+  First Name                Last Name
+  Email
+  Username
+  Password
+  Register Btn
+
+- Replace clear with go back to home page Btn
+
+Login Page:
+
+Add back to home page Btn
+
+Match Finder Page
+
+** Finish User profiles feature
+Update the timestamp to be last active
+Replace Decline text with Remove
+Add animations for when sending request and removing User
+** Finish decline/remove feature for matches
+
+
+-- User avatar pictures
+
