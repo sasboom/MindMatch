@@ -19,6 +19,16 @@
           </b-link>
         </b-nav-item>
         <b-nav-item v-if="isLoggedIn">
+          <b-link to="/match-finder">
+            <b-button variant='outline-dark'>Match Finder</b-button>
+          </b-link>
+        </b-nav-item>
+        <b-nav-item v-if="isLoggedIn">
+          <b-link to="/match-list">
+            <b-button variant='outline-dark'>Match List</b-button>
+          </b-link>
+        </b-nav-item>
+        <b-nav-item v-if="isLoggedIn">
           <b-button @click="logout()" variant="outline-danger">Logout</b-button>
         </b-nav-item>
       </b-navbar-nav>
