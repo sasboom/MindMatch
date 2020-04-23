@@ -20,6 +20,7 @@
         @formResponse="getLoginResponse"
         :responseProp="responseProp"
         :includeClearButton="false"
+        :additionalMutationData="{}"
         submitButtonText="Login"
       />
     </b-container>

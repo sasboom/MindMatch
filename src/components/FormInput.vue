@@ -36,3 +36,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+input {
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+}
+</style>

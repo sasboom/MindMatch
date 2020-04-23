@@ -14,7 +14,7 @@
       <b-button-group vertical class="formBtns">
         <b-button type="submit" variant="outline-success" id="submitBtn">
           <b-spinner small v-if="loading"></b-spinner>
-          <span v-if="!loading" class="btnText">{{submitButtonText}}</span>
+          <span v-if="!loading" class="btnText">{{ submitButtonText }}</span>
         </b-button>
         <b-button
           v-if="includeClearButton"
@@ -38,7 +38,8 @@ export default {
     formElements: Array,
     mutation: Object,
     includeClearButton: Boolean,
-    submitButtonText: String
+    submitButtonText: String,
+    additionalMutationData: Object
   },
   data() {
     return {
@@ -55,11 +56,15 @@ export default {
     },
     submitForm() {
       this.loading = true;
+      const variables = {
+        ...this.form,
+        ...this.additionalMutationData
+      };
       this.$apollo
         .mutate({
           mutation: this.mutation,
           variables: {
-            input: this.form
+            input: variables
           },
           update: (cache, { data }) => {
             this.loading = false;
