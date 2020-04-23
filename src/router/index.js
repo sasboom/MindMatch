@@ -33,6 +33,17 @@ const routes = [
     path: '/match-list',
     name: "Match List",
     component: () => import("../views/MatchList.vue")
+  },
+  {
+    path: "/users/:id",
+    name: "Profile",
+    children: [
+      {
+        path: 'profile',
+        component: () => import("../views/Profile.vue")
+      }
+    ],
+    component: () => import("../views/Users.vue")
   }
 ];
 

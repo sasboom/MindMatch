@@ -24,6 +24,11 @@
           </b-link>
         </b-nav-item>
         <b-nav-item v-if="isLoggedIn">
+          <b-link :to="`users/${this.userId}/profile`">
+            <b-button variant='outline-dark'>Profile</b-button>
+          </b-link>
+        </b-nav-item>
+        <b-nav-item v-if="isLoggedIn">
           <b-link to="/match-list">
             <b-button variant='outline-dark'>Match List</b-button>
           </b-link>
@@ -41,8 +46,10 @@ import { onLogout } from "../vue-apollo";
 export default {
   name: "Navbar",
   data() {
+    const user = JSON.parse(localStorage.getItem("user"));
     return {
-      isLoggedIn: typeof localStorage.getItem("token") === "string"
+      isLoggedIn: typeof localStorage.getItem("token") === "string",
+      userId: user.id
     };
   },
   methods: {

@@ -18,6 +18,7 @@
         @formResponse="getRegisterResponse"
         :responseProp="responseProp"
         :includeClearButton="true"
+        :additionalMutationData="{}"
         submitButtonText="Register"
       />
     </b-container>
@@ -64,7 +65,7 @@ export default {
           placeHolterText: "Please enter your password",
           mutationProp: "password",
           inputType: "password"
-        }
+        },
       ],
       alertProps: {
         show: false,
@@ -112,10 +113,7 @@ export default {
 }
 
 #register-container {
-  border: 1px solid black;
-  border-radius: 5px;
   padding: 5vw;
   margin-top: 2vh;
-  box-shadow: 5px 5px #888888;
 }
 </style>
