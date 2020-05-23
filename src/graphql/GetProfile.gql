@@ -1,0 +1,8 @@
+query GetProfile {
+  profile {
+    payload {
+      userId
+      bio
+      id
+  }
+}
