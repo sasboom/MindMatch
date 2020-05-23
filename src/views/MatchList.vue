@@ -55,9 +55,8 @@ export default {
       .then(response => {
         this.matches = response.data.matches.payload.map(match => ({
           ...match,
-          requestedAt: moment(parseInt(match.createdAt)).fromNow()
+          requestedAt: moment(parseInt(match.createdAt)).fromNow(),
         }));
-        console.log(this.matches);
       });
   },
   mounted: function() {
