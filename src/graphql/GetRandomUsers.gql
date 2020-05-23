@@ -6,6 +6,8 @@ query GetRandomUsers {
       lastName
       username
       updatedAt
+      bio,
+      profileId
     }
   }
 }
