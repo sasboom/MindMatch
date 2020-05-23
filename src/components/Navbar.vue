@@ -10,12 +10,12 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item v-if="!isLoggedIn">
           <b-link to="/login">
-            <p class="navlinks">Login</p>
+            <b-button variant='outline-dark'>Login</b-button>
           </b-link>
         </b-nav-item>
         <b-nav-item v-if="!isLoggedIn">
           <b-link to="/register">
-            <p class="navlinks">Register</p>
+            <b-button variant='outline-dark'>Register</b-button>
           </b-link>
         </b-nav-item>
         <b-nav-item v-if="isLoggedIn">
@@ -49,7 +49,7 @@ export default {
     const user = JSON.parse(localStorage.getItem("user"));
     return {
       isLoggedIn: typeof localStorage.getItem("token") === "string",
-      userId: user.id
+      userId: (user) ? user.id: null
     };
   },
   methods: {
