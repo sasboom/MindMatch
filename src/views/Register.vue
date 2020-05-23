@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <MessageAlert
       :show="alertProps.show"
       :variant="alertProps.variant"
@@ -29,6 +30,7 @@
 const CREATE_USER = require("../graphql/CreateUser.gql");
 import MessageAlert from "../components/MessageAlert";
 import Form from "../components/Form.vue";
+import Navbar from "../components/Navbar.vue";
 
 export default {
   data() {
@@ -71,12 +73,13 @@ export default {
         show: false,
         variant: "",
         message: ""
-      }
+      },
     };
   },
   components: {
     MessageAlert,
-    Form
+    Form,
+    Navbar
   },
   mounted: function() {
     localStorage.clear();
@@ -91,7 +94,7 @@ export default {
         this.alertProps.show = true;
         this.alertProps.variant = "success";
         this.alertProps.message =
-          "Successfully created an account. Please login to continue.";
+          "Successfully created an account. Please login and complete your profile.";
       }
     },
     resetAlertProps() {
