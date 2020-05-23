@@ -8,12 +8,15 @@
       :dismissedFn="resetAlertProps"
     />
     <b-spinner v-if="isLoading" label="Spinning"></b-spinner>
-    <b-container v-else-if="randomUsers && !isLoading" class="card-set">
+    <b-card v-if="randomUsers.length <= 0" class="mb-8">
+        <b-card-sub-title>No matches were currently found.</b-card-sub-title>
+    </b-card>
+    <b-container v-if="randomUsers.length > 0 && !isLoading" class="card-set">
       <b-card-group columns>
         <div v-for="user in randomUsers" :key="user.id">
-          <b-card :title="user.username" style="max-width: 20rem;" class="mb-4">
-            <b-card-text>User introduction</b-card-text>
-            <b-card-text>{{user.firstName}} {{user.lastName}}</b-card-text>
+          <b-card :title="`${user.firstName} ${user.lastName}`" style="max-width: 20rem;" class="mb-4">
+            <b-card-sub-title> User Bio </b-card-sub-title>
+            <b-card-text>{{ user.bio }} </b-card-text>
             <b-button-group vertical>
               <b-button
                 @click="sendRequest(user)"
@@ -29,8 +32,6 @@
         </div>
       </b-card-group>
     </b-container>
-    <!-- No result -->
-    <div v-else>No result :(</div>
   </div>
 </template>
 
