@@ -84,7 +84,6 @@ export async function onLogin(apolloClient, token, user) {
   }
   if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient)
   try {
-    console.log(apolloClient);
     await apolloClient.clearStore()
   } catch (e) {
     // eslint-disable-next-line no-console
