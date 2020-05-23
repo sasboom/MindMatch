@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <MessageAlert
       :show="alertProps.show"
       :variant="alertProps.variant"
@@ -29,6 +30,7 @@
 
 <script>
 // @ is an alias to /src
+import Navbar from "../components/Navbar";
 import Form from "../components/Form.vue";
 import LoginMutation from "../graphql/Login.gql";
 import MessageAlert from "../components/MessageAlert";
@@ -36,6 +38,7 @@ import { onLogin } from "../vue-apollo";
 export default {
   name: "Home",
   components: {
+    Navbar,
     Form,
     MessageAlert
   },
@@ -61,8 +64,14 @@ export default {
         show: false,
         variant: "",
         message: ""
-      }
+      },
+      isLoggedIn: typeof localStorage.getItem("token") === "string"
     };
+  },
+  mounted: function () {
+    if (this.isLoggedIn) {
+      this.$router.push("/match-finder");
+    }
   },
   methods: {
     getLoginResponse(data) {
