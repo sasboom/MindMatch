@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar />
     <MessageAlert
       :show="alertProps.show"
       :variant="alertProps.variant"
@@ -31,6 +32,7 @@
 import CREATE_PROFILE from "../graphql/CreateProfile.gql";
 import Form from "../components/Form.vue";
 import MessageAlert from "../components/MessageAlert";
+import Navbar from "../components/Navbar";
 
 export default {
   data() {
@@ -47,7 +49,7 @@ export default {
           placeholderText: "Please enter your bio",
           mutationProp: "bio",
           inputType: "text"
-        }
+        },
       ],
       additionalMutationData,
       alertProps: {
@@ -59,7 +61,8 @@ export default {
   },
   components: {
     Form,
-    MessageAlert
+    MessageAlert,
+    Navbar
   },
   methods: {
     getCreateProfileResponse(data) {
@@ -93,10 +96,7 @@ export default {
 }
 
 #profile-container {
-  border: 1px solid black;
-  border-radius: 5px;
   padding: 5vw;
   margin-top: 2vh;
-  box-shadow: 5px 5px #888888;
 }
 </style>
