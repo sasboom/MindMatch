@@ -21,7 +21,7 @@ const defaultOptions = {
   httpEndpoint,
   // You can use `wss` for secure connection (recommended in production)
   // Use `null` to disable subscriptions
-  wsEndpoint: null,
+  wsEndpoint: 'ws://localhost:3000/graphql',
   // LocalStorage token
   tokenName: AUTH_TOKEN,
   // Enable Automatic Query persisting with Apollo Engine
@@ -31,7 +31,6 @@ const defaultOptions = {
   websocketsOnly: false,
   // Is being rendered on the server?
   ssr: false,
-
   // Override default apollo link
   // note: don't override httpLink here, specify httpLink options in the
   // httpLinkOptions property of defaultOptions.
@@ -94,7 +93,7 @@ export async function onLogin(apolloClient, token, user) {
 // Manually call this when user log out
 export async function onLogout(apolloClient) {
   if (typeof localStorage !== 'undefined') {
-    localStorage.removeItem(AUTH_TOKEN)
+    localStorage.clear();
   }
   if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient)
   try {
