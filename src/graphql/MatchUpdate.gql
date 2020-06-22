@@ -1,7 +1,10 @@
-mutation matchUpdate($input: MatchUpdateInputType) {
-  MatchUpdate(input: $input) {
-    initiatorUserId,
-    requestedUserId,
-    status
+mutation matchUpdate($input: UpdateMatchParams) {
+  UpdateMatch(input: $input) {
+    error
+    payload {
+      initiatorUserId,
+      requestedUserId,
+      status
+    }
   }
 }

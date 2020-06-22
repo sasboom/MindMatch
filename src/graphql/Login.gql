@@ -1,4 +1,4 @@
-mutation loginUser($input: LoginUserInput) {
+mutation loginUser($input: LoginUserParams) {
   LoginUser(input: $input) {
     error,
     payload {

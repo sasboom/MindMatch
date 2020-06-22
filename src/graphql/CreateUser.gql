@@ -1,9 +1,12 @@
-mutation createNewUser($input: CreateUserInput) {
+mutation createNewUser($input: CreateUserParams) {
   CreateUser(input: $input) {
-    username
-    id
-    firstName
-    lastName
-    email
+    error
+    payload {
+      username
+      id
+      firstName
+      lastName
+      email
+    }
   }
 }

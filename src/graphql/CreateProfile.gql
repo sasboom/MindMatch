@@ -1,7 +1,10 @@
-mutation createProfile($input: CreateProfileInput) {
+mutation createProfile($input: CreateProfileParams) {
   CreateProfile(input: $input) {
-    id,
-    userId,
-    bio
+    error
+    payload {
+      id,
+      userId,
+      bio
+    }
   }
 }
